@@ -11,7 +11,7 @@ public:
     cartilage::Message msg;
     msg.header.message_type = 0;
 
-    auto now = std::chrono::high_resolution_clock::now();
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
     msg << now;
 
     Send(msg);
@@ -31,7 +31,7 @@ int main() {
     cartilage::Message msg = client.IncomingMessages().pop_front().msg;
     switch (msg.header.message_type) {
       case 0:
-        auto now = std::chrono::high_resolution_clock::now();
+        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
         std::chrono::steady_clock::time_point sent_time;
         msg >> sent_time;
 
